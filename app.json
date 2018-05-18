@@ -1,0 +1,53 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/team/team",
+    "pages/match/match",
+    "pages/msg/msg",
+    "pages/about/about"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "运动",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#1aad19",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "assets/image/index.png",
+        "selectedIconPath": "assets/image/index-active.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/team/team",
+        "iconPath": "assets/image/train.png",
+        "selectedIconPath": "assets/image/train-active.png",
+        "text": "球队"
+      },
+      {
+        "pagePath": "pages/match/match",
+        "iconPath": "assets/image/vs.png",
+        "selectedIconPath": "assets/image/vs-active.png",
+        "text": "赛事"
+      },
+      {
+        "pagePath": "pages/msg/msg",
+        "iconPath": "assets/image/msg.png",
+        "selectedIconPath": "assets/image/msg-active.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "iconPath": "assets/image/about.png",
+        "selectedIconPath": "assets/image/about-active.png",
+        "text": "我的"
+      }
+    ]
+  }
+}
