@@ -1,28 +1,72 @@
+var bmap = require('../../baidu/libs/bmap-wx.min.js');
+var wxMarkerData = [];
 Page({
   data: {
     inputShowed: false,
     inputVal: "",
-    latitude: 23.099994,
-    longitude: 113.324520,
-    markers: [{
-      id: 1,
-      latitude: 23.099994,
-      longitude: 113.324520,
-      name: 'T.I.T 创意园'
-    }],
-    covers: [{
-      latitude: 23.099994,
-      longitude: 113.344520,
-      iconPath: '/assets/image/locationfootball.png'
-    }, {
-      latitude: 23.099994,
-      longitude: 113.304520,
-      iconPath: '/assets/image/locationbasketball.png'
-    }]
+    markers: [],
+    latitude: '',
+    longitude: '',
+    placeData: {}
   },
-  onReady: function (e) {
-    this.mapCtx = wx.createMapContext('myMap')
-    this.includePoints()
+  makertap: function (e) {
+    var that = this;
+    var id = e.markerId;
+    that.showSearchInfo(wxMarkerData, id);
+    that.changeMarkerColor(wxMarkerData, id);
+  },
+  onLoad: function () {
+    var that = this;
+    var BMap = new bmap.BMapWX({
+      ak: 'tS7QkonVsVGh0VDdkIE2feekLGtDSGfu'
+    });
+    var fail = function (data) {
+      console.log(data)
+    };
+    var success = function (data) {
+      wxMarkerData = data.wxMarkerData;
+      that.setData({
+        markers: wxMarkerData
+      });
+      that.setData({
+        latitude: wxMarkerData[0].latitude
+      });
+      that.setData({
+        longitude: wxMarkerData[0].longitude
+      });
+    }
+    BMap.search({
+      "query": '美食',
+      fail: fail,
+      success: success,
+      iconPath: '../../baidu/img/marker_red.png',
+      iconTapPath: '../../baidu/img/marker_red.png'
+    });
+  },
+  showSearchInfo: function (data, i) {
+    var that = this;
+    that.setData({
+      placeData: {
+        title: '名称：' + data[i].title + '\n',
+        address: '地址：' + data[i].address + '\n',
+        telephone: '电话：' + data[i].telephone
+      }
+    });
+  },
+  changeMarkerColor: function (data, id) {
+    var that = this;
+    var markersTemp = [];
+    for (var i = 0; i < data.length; i++) {
+      if (i === id) {
+        data[i].iconPath = "../../baidu/img/marker_yellow.png";
+      } else {
+        data[i].iconPath = "../../baidu/img/marker_red.png";
+      }
+      markersTemp[i] = data[i];
+    }
+    that.setData({
+      markers: markersTemp
+    });
   },
   showInput: function () {
     this.setData({
@@ -44,17 +88,5 @@ Page({
     this.setData({
       inputVal: e.detail.value
     });
-  },
-  includePoints: function () {
-    this.mapCtx.includePoints({
-      padding: [10],
-      points: [{
-        latitude: 23.10229,
-        longitude: 113.3345211,
-      }, {
-        latitude: 23.00229,
-        longitude: 113.3345211,
-      }]
-    })
   }
 });
