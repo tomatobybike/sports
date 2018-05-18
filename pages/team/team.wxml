@@ -1,2 +1,5 @@
-<!--pages/team/team.wxml-->
-<text>pages/team/team.wxml</text>
+<view class="btn-area">
+  <navigator url="/pages/msg/msg" hover-class="navigator-hover" redirect>跳转到新页面</navigator>
+  <navigator url="../../redirect/redirect/redirect?title=redirect" open-type="redirect" hover-class="other-navigator-hover">在当前页打开</navigator>
+
+</view>

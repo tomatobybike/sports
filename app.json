@@ -4,7 +4,8 @@
     "pages/team/team",
     "pages/match/match",
     "pages/msg/msg",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/search/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

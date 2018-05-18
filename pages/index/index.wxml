@@ -17,24 +17,14 @@
             <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
         </view>
         <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+            <navigator url="/pages/search/index" class="weui-cell" hover-class="weui-cell_active">
                 <view class="weui-cell__bd">
-                    <view>足球</view>
+                    <view>球队</view>
                 </view>
             </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+            <navigator url="/pages/search/index" class="weui-cell" hover-class="weui-cell_active">
                 <view class="weui-cell__bd">
-                    <view>篮球</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>高尔夫</view>
-                </view>
-            </navigator>
-            <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-                <view class="weui-cell__bd">
-                    <view>乒乓球</view>
+                    <view>赛事</view>
                 </view>
             </navigator>
         </view>
