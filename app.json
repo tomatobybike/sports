@@ -5,7 +5,8 @@
     "pages/match/match",
     "pages/msg/msg",
     "pages/about/about",
-    "pages/search/index"
+    "pages/search/index",
+    "pages/membersinfo/membersinfo"
   ],
   "window":{
     "backgroundTextStyle":"light",
