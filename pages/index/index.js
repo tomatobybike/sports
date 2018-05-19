@@ -10,10 +10,10 @@ Page({
       longitude: 113.324520,
       name: 'T.I.T 创意园'
     }],
-    covers: [{
+    markers: [{
       latitude: 23.099994,
       longitude: 113.344520,
-      iconPath: '/assets/image/locationfootball.png'
+      iconPath: '/assets/image/marker.png'
     }, {
       latitude: 23.099994,
       longitude: 113.304520,

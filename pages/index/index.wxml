@@ -29,15 +29,24 @@
             </navigator>
         </view>
         <view class="page-section page-section-gap">
-          <map
-            id="myMap"
-            style="width: 100%; height: 100vh;"
-            latitude="{{latitude}}"
-            longitude="{{longitude}}"
-            markers="{{markers}}"
-            covers="{{covers}}"
-            show-location
+          <view class="map_container">
+            <map
+              id="myMap"
+              style="width: 100%; height: 100%;"
+              latitude="{{latitude}}"
+              longitude="{{longitude}}"
+              markers="{{markers}}"
+              covers="{{covers}}"
+              show-location
           ></map>
+          </view>
+          <view class="place_info">
+            <text>{{placeData.title}}</text>
+            <text>{{placeData.address}}</text>
+            <text>{{placeData.telephone}}</text>
+          </view>
+
+
         </view>
     </view>
 </view>
