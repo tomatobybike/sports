@@ -4,49 +4,27 @@ Page({
   data: {
     inputShowed: false,
     inputVal: "",
-    latitude: 23.099994,
-    longitude: 113.324520,
-    markers: [{
-      id: 1,
-      latitude: 23.099994,
-      longitude: 113.324520,
-      name: 'T.I.T 创意园'
-<<<<<<< HEAD
-    }],
-    markers: [{
-      latitude: 23.099994,
-      longitude: 113.344520,
-      iconPath: '/assets/image/marker.png'
-=======
-    },{
-      latitude: 23.099994,
-      longitude: 113.344520,
-      iconPath: '/assets/image/location.png'
->>>>>>> f5d786687bac8e54fb8469a4694da2950da60957
-    }, {
-      latitude: 23.099994,
-      longitude: 113.304520,
-      iconPath: '/assets/image/location.png'
-    }],
-    covers: []
+    searchResults: []
   },
   onShow: function (e) {
     this.mapCtx = wx.createMapContext('myMap')
     this.moveToLocation()
-    //this.includePoints()
-    // 调用接口
-    qqmapsdk.search({
-      keyword: '酒店',
+    //  this.includePoints()
+    var _that = this;
+    wx.getLocation({
+      type: 'wgs84',
       success: function (res) {
-        console.log(res);
-      },
-      fail: function (res) {
-        console.log(res);
-      },
-      complete: function (res) {
-        console.log(res);
+        var latitude = res.latitude
+        var longitude = res.longitude
+        var speed = res.speed
+        var accuracy = res.accuracy
+        _that.setData({ //结果更新至data中
+          latitude: latitude,
+          longitude:longitude
+        });
       }
-    });
+    })
+
   },
   onLoad: function (options) {
     // 实例化API核心类
@@ -75,17 +53,6 @@ Page({
               left: res.windowWidth - 70,
               top: 150,
               width: 45,
-              height: 45
-            },
-            clickable: true
-          },
-          {
-            id: 4,
-            iconPath: '/assets/image/map/marker.png',
-            position: {
-              left: res.windowWidth / 2 - 11,
-              top: res.windowHeight / 2 - 45,
-              width: 22,
               height: 45
             },
             clickable: true
@@ -201,6 +168,21 @@ Page({
       }]
     })
   },
+  pinMapBySuggest: function (e) {
+    console.log('e',e)
+    var location = e.currentTarget.dataset.location;
+    this.setData({ //结果更新至data中
+      latitude: location.lat,
+      longitude: location.lng,
+      searchResults:[],
+      markers: [{
+        latitude: location.lat,
+        longitude: location.lng,
+        iconPath: '/assets/image/location.png',
+        clickable: true
+      }]
+    });
+  },
   showSearchInfo: function (data, i) {
     var that = this;
     that.setData({
@@ -231,6 +213,47 @@ Page({
     });
   },
   inputTyping: function (e) {
+    var _that = this;
+    qqmapsdk.getSuggestion({
+      keyword: e.detail.value,
+      success: function (res) {
+        console.log(res);
+        if (res.data.length == 0) { //若无搜索结果则提示用户
+          _that.setData({
+            searchResults: [{
+              title: "暂无此信息",
+              address: "请确认后再次输入"
+            }]
+          });
+          return;
+        }
+        var searchResults = [];
+        for (var i = 0; i < res.data.length; i++) {
+          var result = res.data[i];
+          var title = result.title;
+          var address = result.address;
+          if (address.length >= 20) {
+            address = address.substring(0, 20) + "...";
+          }
+          var temp = {
+            title: title,
+            address: address,
+            location: result.location
+          }
+
+          searchResults.push(temp);
+        }
+        _that.setData({ //结果更新至data中
+          searchResults: searchResults
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+      },
+      complete: function (res) {
+        console.log(res);
+      }
+    });
     this.setData({
       inputVal: e.detail.value
     });

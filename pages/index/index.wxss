@@ -1,26 +1,38 @@
-.searchbar-result{
-    margin-top: 0;
-    font-size: 14px;
+.search-result {
+  background-color: #fff;
+  height: 130rpx;
+  display: flex;
+  flex-direction: column;
+  padding-top:32rpx;
 }
-.searchbar-result:before{
-    display: none;
+
+.search-info{
+  margin-left: 30rpx;
+  padding-bottom:35rpx;
+  border-bottom: 1px solid #eee;
 }
-.weui-cell{
-    padding: 12px 15px 12px 35px;
+
+
+.search-result-title {
+  font-size: 34rpx;
+  line-height: 30px;
 }
-<<<<<<< HEAD
+
+
+.search-result-address {
+  color: #bdbdbd;
+  font-size: 26rpx;
+}
+
 /* baidu map  */
 
 .map_container{
     height: 320px;
-=======
-
+}
 .map_container{
     height: 100hv;
->>>>>>> f5d786687bac8e54fb8469a4694da2950da60957
     width: 100%;
 }
-
 .map {
     height: 100%;
     width: 100%;
@@ -28,9 +40,4 @@
 
 .place_info {
     padding: 0 5px;
-<<<<<<< HEAD
 }
-/* baidu map  */
-=======
-}
->>>>>>> f5d786687bac8e54fb8469a4694da2950da60957
