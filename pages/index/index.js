@@ -4,7 +4,8 @@ Page({
   data: {
     inputShowed: false,
     inputVal: "",
-    searchResults: []
+    searchResults: [],
+    isPop: false
   },
   onShow: function (e) {
     this.mapCtx = wx.createMapContext('myMap')
@@ -71,6 +72,12 @@ Page({
         })
       }
     });
+  },
+  bindmarkertap: function (e) {
+    this.setData({
+      isPop: true
+    })
+    console.log(e);
   },
   // 地图控件点击事件
   bindcontroltap: function (e) {
@@ -170,17 +177,28 @@ Page({
   },
   pinMapBySuggest: function (e) {
     console.log('e',e)
-    var location = e.currentTarget.dataset.location;
+    var dataset = e.currentTarget.dataset;
+    var location = dataset.location;
     this.setData({ //结果更新至data中
       latitude: location.lat,
       longitude: location.lng,
       searchResults:[],
       markers: [{
+        id:new Date().getTime(),
         latitude: location.lat,
         longitude: location.lng,
         iconPath: '/assets/image/location.png',
+        callout: {
+          content: dataset.title,
+          color:'#ffffff',
+          padding:10,
+          borderRadius:5,
+          bgColor:'#1AAD19',
+          display:'BYCLICK'
+        },
         clickable: true
-      }]
+      }],
+      'map.hasMarkers': true//解决方案  
     });
   },
   showSearchInfo: function (data, i) {
