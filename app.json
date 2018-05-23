@@ -6,6 +6,12 @@
     "pages/msg/msg",
     "pages/about/about",
     "pages/search/index",
+    "pages/mappop/mappop",
+    "pages/ask/ask",
+    "pages/ask/base",
+    "pages/ask/special",
+    "pages/intro/intro",
+    "pages/developers/developers",
     "pages/membersinfo/membersinfo"
   ],
   "window":{
@@ -27,7 +33,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/team/team",
+        "pagePath": "pages/ask/ask",
         "iconPath": "assets/image/train.png",
         "selectedIconPath": "assets/image/train-active.png",
         "text": "球队"

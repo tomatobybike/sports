@@ -1,0 +1,6 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">开发团队 </view>
+        <view class="page__desc">copy@West Coder</view>
+    </view>
+</view>

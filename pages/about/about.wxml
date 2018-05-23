@@ -1,2 +1,28 @@
-<!--pages/about/about.wxml-->
-<text>pages/about/about.wxml</text>
+<!--about.wxml-->
+<view class="page">
+  <view class="container">
+    <view class="padding">
+      <view class="iconfont icon-kicker"></view>
+    </view>
+    <view>运动 0.1.0</view>
+  </view>
+
+  <view>
+      <view class="kind-list">
+          <block wx:for="{{list}}" wx:key="id">
+              <view class="kind-list__item">
+                  <view class="kind-list__item-bd {{item.open ? 'kind-list__item-bd_show' : ''}}">
+                      <view class="weui-cells {{item.open ? 'weui-cells_show' : ''}}">
+                          <block wx:for="{{item.pages}}" wx:for-item="page" wx:key="*this">
+                              <navigator url="{{page.url}}" class="weui-cell weui-cell_access">
+                                  <view class="weui-cell__bd">{{page.name}}</view>
+                                  <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                              </navigator>
+                          </block>
+                      </view>
+                  </view>
+              </view>
+          </block>
+      </view>
+  </view>
+</view>

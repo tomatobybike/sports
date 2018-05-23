@@ -79,6 +79,21 @@ Page({
     })
     console.log(e);
   },
+  bindcallouttap: function (e) {
+    wx.showActionSheet({
+      itemList: ['跳转到A页面', '跳转到B页面', '跳转到B页面'],
+      success: function (res) {
+        console.log(res.tapIndex)
+        wx.navigateTo({
+          url: '../mappop/mappop'
+        })
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
+    console.log('气泡跳转')
+  },
   // 地图控件点击事件
   bindcontroltap: function (e) {
     // 判断点击的是哪个控件 e.controlId代表控件的id，在页面加载时的第3步设置的id
@@ -132,7 +147,7 @@ Page({
         break;
       // 点击头像控件，跳转到个人中心
       case 5: wx.navigateTo({
-        url: '../my/index'
+        url: '../about/about'
       });
         break;
       default: break;
@@ -180,6 +195,7 @@ Page({
     var dataset = e.currentTarget.dataset;
     var location = dataset.location;
     this.setData({ //结果更新至data中
+      inputVal:'',
       latitude: location.lat,
       longitude: location.lng,
       searchResults:[],
@@ -232,6 +248,8 @@ Page({
   },
   inputTyping: function (e) {
     var _that = this;
+    // qqmapsdk.search 地点搜索，搜索周边poi
+    // qqmapsdk.getSuggestion 用于获取输入关键字的补完与提示，帮助用户快速输入
     qqmapsdk.getSuggestion({
       keyword: e.detail.value,
       success: function (res) {

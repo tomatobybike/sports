@@ -1,0 +1,6 @@
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">功能介绍 </view>
+        <view class="page__desc">中国足球冲出银河系，就靠你们大家了</view>
+    </view>
+</view>

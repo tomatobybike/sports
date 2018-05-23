@@ -1,1 +1,4 @@
-/* pages/about/about.wxss */
+.icon-kicker{
+  color:#1aad19;
+  font-size:30px;
+}

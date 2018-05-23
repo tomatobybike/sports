@@ -1,0 +1,35 @@
+<view  class="page">
+  <view class="cd-horizontal-timeline loaded">
+      <div class="events-wrapper">
+        <div class="events" style="width: 99vw;margin:0 auto;">
+          <ol>
+            <li><a href="#0" class="selected" style="left: 3%;">选择类型</a></li>
+            <li><a href="#0" style="left: 30%;">基础属性</a></li>
+            <li><a href="#0" style="left: 60%;">专项属性</a></li>
+            <li><a href="#0" style="left: 88%;">计分</a></li>
+          </ol>
+        </div>
+      </div> 
+  </view>
+  <view class="page__bd_spacing">
+    <view class="balls">
+      <li  bindtap="choseSports" data-index="0">
+        <view class="iconfont icon-football ball"></view>
+        <view class="weui-cell__hd weui-check__hd_in-checkbox">
+            <view class="weui-cell__bd">足球</view>
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!radioItems[0].checked}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{radioItems[0].checked}}"></icon>
+        </view>
+      </li>
+      <li bindtap="choseSports" data-index="1">
+        <view class="iconfont icon-basketball ball"></view>
+        <view class="weui-cell__hd weui-check__hd_in-checkbox">
+            <view class="weui-cell__bd">篮球</view>
+            <icon class="weui-icon-checkbox_circle" type="circle" size="23" wx:if="{{!radioItems[1].checked}}"></icon>
+            <icon class="weui-icon-checkbox_success" type="success" size="23" wx:if="{{radioItems[1].checked}}"></icon>
+        </view>
+      </li>
+    </view>
+    <button class="weui-btn" type="primary" bindtap="next">下一步</button>
+  </view>
+</view>

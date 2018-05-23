@@ -35,6 +35,7 @@
               covers="{{covers}}"
               show-location
               controls="{{controls}}"
+              bindcallouttap="bindcallouttap"
               bindmarkertap="bindmarkertap"  bindcontroltap="bindcontroltap"
             ></map>
           </view>
