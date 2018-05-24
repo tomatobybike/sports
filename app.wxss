@@ -1,6 +1,9 @@
 /**app.wxss**/
 @import "/assets/iconfont/iconfont";
-@import 'weui/style/weui.wxss';
+
+@import 'components/wux.wxss';
+@import 'assets/styles/weui.wxss';
+@import 'assets/styles/skyvow.wxss';
 text {
     line-height: 25px;
 }

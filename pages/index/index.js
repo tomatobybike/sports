@@ -1,4 +1,5 @@
 var QQMapWX = require('../../libs/qqmap-wx-jssdk.min.js');
+import { $wuxButton } from '../../components/wux'
 var qqmapsdk;
 Page({
   data: {
@@ -28,6 +29,22 @@ Page({
 
   },
   onLoad: function (options) {
+    wx.showModal({
+      title: '属性问卷',
+      content: '首次登录，请先答一份问卷',
+      confirmText: "好",
+      cancelText: "不，谢谢",
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '../ask/ask'
+          })
+        } else {
+          console.log('用户点击辅助操作')
+        }
+      }
+    });
     // 实例化API核心类
     qqmapsdk = new QQMapWX({
       key: 'P3JBZ-WX36G-3K4QJ-ITACJ-BT42Z-6OBZR'

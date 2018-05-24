@@ -10,6 +10,7 @@
     "pages/ask/ask",
     "pages/ask/base",
     "pages/ask/special",
+    "pages/ask/score",
     "pages/intro/intro",
     "pages/developers/developers",
     "pages/membersinfo/membersinfo"
@@ -33,7 +34,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/ask/ask",
+        "pagePath": "pages/team/team",
         "iconPath": "assets/image/train.png",
         "selectedIconPath": "assets/image/train-active.png",
         "text": "球队"

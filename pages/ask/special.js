@@ -39,5 +39,11 @@ Page({
     this.setData({
       skillIndex: e.detail.value
     })
+  },
+  formSubmit: function (e) {
+    wx.navigateTo({
+      url: 'score'
+    })
+
   }
 })
