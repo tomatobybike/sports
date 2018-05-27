@@ -37,7 +37,6 @@
               controls="{{controls}}"
               bindcallouttap="bindcallouttap"
               bindmarkertap="bindmarkertap"  bindcontroltap="bindcontroltap"
-              wx:if="{{map}}"
             ></map>
           </view>
           <view class="place_info">

@@ -6,8 +6,7 @@ Page({
     inputShowed: false,
     inputVal: "",
     searchResults: [],
-    isPop: false,
-    map:true
+    isPop: false
   },
   onShow: function (e) {
     this.mapCtx = wx.createMapContext('myMap')
@@ -28,62 +27,6 @@ Page({
       }
     })
 
-  },
-  getMakers: function () {
-    var _that = this
-    _that.setData({ //结果更新至data中
-      map: false
-    });
-    // qqmapsdk.search 地点搜索，搜索周边poi
-    // qqmapsdk.getSuggestion 用于获取输入关键字的补完与提示，帮助用户快速输入
-    qqmapsdk.search({
-      keyword: '酒店',
-      success: function (res) {
-        console.log(res);
-        if (res.data.length == 0) { //若无搜索结果则提示用户
-          _that.setData({
-            searchResults: [{
-              title: "暂无此信息",
-              address: "请确认后再次输入"
-            }]
-          });
-          return;
-        }
-        var searchResults = [];
-        var markers = []
-        for (var i = 0, len = res.data.length; i < len; i++) {
-          var obj = res.data[i]
-          markers.push({
-            id: obj.id,
-            latitude: obj.location.lat,
-            longitude: obj.location.lng,
-            iconPath: '/assets/image/location.png',
-            callout: {
-              content: obj.title,
-              color: '#ffffff',
-              padding: 10,
-              borderRadius: 5,
-              bgColor: '#1AAD19',
-              fontSize:14,
-              display: 'BYCLICK'
-            },
-            clickable: true
-          })
-        }
-        _that.setData({ //结果更新至data中
-          map: true,
-          searchResults: searchResults,
-          markers: markers
-        });
-      },
-      fail: function (res) {
-        console.log(res);
-      },
-      complete: function (res) {
-        console.log(res);
-        console.log('getmarkers')
-      }
-    });
   },
   onLoad: function (options) {
     wx.showModal({
@@ -106,11 +49,6 @@ Page({
     qqmapsdk = new QQMapWX({
       key: 'P3JBZ-WX36G-3K4QJ-ITACJ-BT42Z-6OBZR'
     });
-    var _that = this
-    setTimeout(function(){
-      _that.getMakers()
-    },300)
-    
     // 3.设置地图控件的位置及大小，通过设备宽高定位
     wx.getSystemInfo({
       success: (res) => {
@@ -327,12 +265,9 @@ Page({
   },
   inputTyping: function (e) {
     var _that = this;
-    _that.setData({ //结果更新至data中
-      map: false
-    });
     // qqmapsdk.search 地点搜索，搜索周边poi
     // qqmapsdk.getSuggestion 用于获取输入关键字的补完与提示，帮助用户快速输入
-    qqmapsdk.search({
+    qqmapsdk.getSuggestion({
       keyword: e.detail.value,
       success: function (res) {
         console.log(res);
@@ -344,31 +279,25 @@ Page({
             }]
           });
           return;
-        } 
+        }
         var searchResults = [];
-        var markers = []
-        for(var i=0,len=res.data.length;i<len;i++){
-          var obj = res.data[i]
-          markers.push({
-            id: obj.id,
-            latitude: obj.location.lat,
-            longitude: obj.location.lng,
-            iconPath: '/assets/image/location.png',
-            callout: {
-              content: obj.title,
-              color: '#ffffff',
-              padding: 10,
-              borderRadius: 5,
-              bgColor: '#1AAD19',
-              display: 'BYCLICK'
-            },
-            clickable: true
-          })
+        for (var i = 0; i < res.data.length; i++) {
+          var result = res.data[i];
+          var title = result.title;
+          var address = result.address;
+          if (address.length >= 20) {
+            address = address.substring(0, 20) + "...";
+          }
+          var temp = {
+            title: title,
+            address: address,
+            location: result.location
+          }
+
+          searchResults.push(temp);
         }
         _that.setData({ //结果更新至data中
-          map: true,
-          searchResults: searchResults,
-          markers: markers
+          searchResults: searchResults
         });
       },
       fail: function (res) {
