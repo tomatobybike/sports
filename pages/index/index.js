@@ -64,8 +64,9 @@ Page({
               padding: 10,
               borderRadius: 5,
               bgColor: '#1AAD19',
-              fontSize:14,
-              display: 'BYCLICK'
+              fontSize: 14,
+              display: 'BYCLICK',
+              address:obj.address
             },
             clickable: true
           })
@@ -158,9 +159,24 @@ Page({
     })
     console.log(e);
   },
+  getMarkerById: function (id) {
+    var obj = {};
+    for (var i = 0, len = this.data.markers.length;i<len;i++){
+      if(this.data.markers[i].id == id){
+        obj = this.data.markers[i]
+        break
+      }
+    }
+    return obj;
+  },
   bindcallouttap: function (e) {
+    console.log(e)
+    var objCallout = this.getMarkerById(e.markerId).callout
+    var calloutDetails = objCallout.content + '(' + objCallout.address + ')'
+    calloutDetails = objCallout.address
+    console.log('xxx', objCallout)
     wx.showActionSheet({
-      itemList: ['跳转到A页面', '跳转到B页面', '跳转到B页面'],
+      itemList: [calloutDetails],
       success: function (res) {
         console.log(res.tapIndex)
         wx.navigateTo({
@@ -360,7 +376,9 @@ Page({
               padding: 10,
               borderRadius: 5,
               bgColor: '#1AAD19',
-              display: 'BYCLICK'
+              display: 'BYCLICK',
+              fontSize: 14,
+              address: obj.address
             },
             clickable: true
           })
